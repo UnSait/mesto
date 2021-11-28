@@ -6,11 +6,13 @@
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
-<body>
+<body class="body">
     <div class="page">
+
       <header class="header">
         <img class="header__logo" src="./image/logo.png" alt="Лого">
       </header>
+
 
       <main class="main">
         <section class="profile">
@@ -20,10 +22,10 @@
              <h2 class="profile__name">Жак-Ив Кусто</h2>
              <p class="profile__status">Исследователь океана</p>
             </div>
-            <button class="profile__edit-button">
-           </button>
+            <button class="profile__edit-button hover">
+            </button>
           </div>
-          <button class="profile__add-button">
+          <button class="profile__add-button hover">
           </button>
         </section>
 
@@ -34,7 +36,7 @@
               <div class="elements__element-info">
                 <h2 class="elements__element-name">Карачаевск</h2>
                 <button class="elements__element-button">
-                  <img class="elements__element-like" src="./image/heart.png" alt="Лайк">
+                  <img class="elements__element-like hover" src="./image/heart.png" alt="Лайк">
                 </button>
               </div>
             </li>
@@ -43,7 +45,7 @@
               <div class="elements__element-info">
                 <h2 class="elements__element-name">Гора Эльбрус</h2>
                 <button class="elements__element-button">
-                 <img class="elements__element-like" src="./image/heart.png" alt="Лайк">
+                 <img class="elements__element-like hover" src="./image/heart.png" alt="Лайк">
                 </button>
               </div>
             </li>
@@ -52,7 +54,7 @@
               <div class="elements__element-info">
                 <h2 class="elements__element-name">Домбай</h2>
                 <button class="elements__element-button">
-                  <img class="elements__element-like" src="./image/heart.png" alt="Лайк">
+                  <img class="elements__element-like hover" src="./image/heart.png" alt="Лайк">
                 </button>
               </div>
             </li>
@@ -61,7 +63,7 @@
               <div class="elements__element-info">
                 <h2 class="elements__element-name">Гора Эльбрус</h2>
                 <button class="elements__element-button">
-                  <img class="elements__element-like" src="./image/heart.png" alt="Лайк">
+                  <img class="elements__element-like hover" src="./image/heart.png" alt="Лайк">
                 </button>
               </div>
             </li>
@@ -70,7 +72,7 @@
               <div class="elements__element-info">
                 <h2 class="elements__element-name">Домбай</h2>
                 <button class="elements__element-button">
-                  <img class="elements__element-like" src="./image/heart.png" alt="Лайк">
+                  <img class="elements__element-like hover" src="./image/heart.png" alt="Лайк">
                 </button>
               </div>
             </li>
@@ -79,7 +81,7 @@
               <div class="elements__element-info">
                 <h2 class="elements__element-name">Карачаево-Черкесия</h2>
                 <button class="elements__element-button">
-                  <img class="elements__element-like" src="./image/heart.png" alt="Лайк">
+                  <img class="elements__element-like hover" src="./image/heart.png" alt="Лайк">
                 </button>
               </div>
             </li>
@@ -94,5 +96,17 @@
 
     </div>
 
+    <div class="popup-background">
+      <div class="popup">
+        <img class="popup__exite hover" src="./image/Close Icon.png" alt="Закрыть">
+        <h2 class="popup__editor">Редактировать профиль</h2>
+        <input class="popup__name input" type="text" placeholder="Жак-Ив Кусто">
+        <input class="popup__status input" type="text" placeholder="Исследователь океана">
+        <button class="popup__save hover"> Сохранить
+        </button>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
 </body>
 </html>

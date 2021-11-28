@@ -1,0 +1,19 @@
+.popup {
+  position: absolute;
+  top: 37%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 430px;
+  height: 330px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 879px) {
+  .popup {
+    width: 282px;
+    height: 322px;
+  }
+}
