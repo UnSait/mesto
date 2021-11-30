@@ -1,9 +1,9 @@
-.popup__name {
+.popup-container__name {
   margin-top: 54px;
 }
 
 @media screen and (max-width: 879px) {
-  .popup__name {
+  .popup-container__name {
     margin-top: 75px;
   }
 }

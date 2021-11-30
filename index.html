@@ -96,14 +96,16 @@
 
     </div>
 
-    <div class="popup-background">
-      <div class="popup">
-        <img class="popup__exite hover" src="./image/Close.png" alt="Закрыть">
-        <h2 class="popup__editor">Редактировать профиль</h2>
-        <input class="popup__name input" type="text" placeholder="Жак-Ив Кусто">
-        <input class="popup__status input" type="text" placeholder="Исследователь океана">
-        <button class="popup__save hover"> Сохранить
-        </button>
+    <div class="popup">
+      <div class="popup-container">
+        <img class="popup-container__exite hover" src="./image/Close.png" alt="Закрыть">
+        <form class="popup-container__form" onsubmit="return false">
+          <h2 class="popup-container__editor">Редактировать профиль</h2>
+          <input class="popup-container__name input" type="text" placeholder="Жак-Ив Кусто">
+          <input class="popup-container__status input" type="text" placeholder="Исследователь океана">
+          <button class="popup-container__save hover"> Сохранить
+          </button>
+        </form>
       </div>
     </div>
 

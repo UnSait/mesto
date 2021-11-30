@@ -1,0 +1,16 @@
+.popup-container__exite {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  left: 240px;
+  bottom: 8px;
+}
+
+@media screen and (max-width: 879px) {
+  .popup-container__exite {
+    width: 20px;
+    height: 20px;
+    left: 135px;
+    bottom: 16px;
+  }
+}
