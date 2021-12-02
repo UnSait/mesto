@@ -1,4 +1,6 @@
 .popup__exite {
+  border: none;
+  background: none;
   width: 32px;
   height: 32px;
   position: relative;

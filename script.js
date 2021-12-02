@@ -5,7 +5,7 @@ let nameProfile = document.querySelector('.profile__name');
 let statusProfile = document.querySelector('.profile__status');
 let inputName = document.querySelector('.popup__input_type_name');
 let inputStatus = document.querySelector('.popup__input_type_stasus');
-let sumbitBottom = document.querySelector('.popup__sumbit');
+let sumbitButton = document.querySelector('.popup__sumbit');
 let formProfile = document.querySelector('.popup__form');
 
 function popupOpen() {
@@ -24,5 +24,5 @@ function profileSumbitHandler(evt) {
 
 popupOpenButton.addEventListener('click', popupOpen);
 popupCloseButton.addEventListener('click', popupClose);
-sumbitBottom.addEventListener('click', popupClose);
+sumbitButton.addEventListener('click', popupClose);
 formProfile.addEventListener('submit', profileSumbitHandler);
