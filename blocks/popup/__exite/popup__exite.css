@@ -1,13 +1,20 @@
-.popup-container__exite {
+.popup__exite {
   width: 32px;
   height: 32px;
   position: relative;
   left: 240px;
   bottom: 8px;
+  transition: 0.5s;
+}
+
+.popup__exite:hover {
+  opacity: 0.6;
+  transition: 0.5s;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 879px) {
-  .popup-container__exite {
+  .popup__exite {
     width: 20px;
     height: 20px;
     left: 135px;

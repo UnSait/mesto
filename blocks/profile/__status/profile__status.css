@@ -1,4 +1,8 @@
 .profile__status {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 300px;
   margin: 0;
   margin-top: 16px;
   font-size: 18px;
@@ -7,6 +11,7 @@
 
 @media screen and (max-width: 879px) {
   .profile__status {
+    max-width: 189px;
     font-size: 14px;
     line-height: 17px;
     text-align: center;

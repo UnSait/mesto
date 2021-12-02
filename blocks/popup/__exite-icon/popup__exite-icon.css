@@ -1,0 +1,11 @@
+.popup__exite-icon {
+  width: 32px;
+  height: 32px;
+}
+
+@media screen and (max-width: 879px) {
+  .popup__exite-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
