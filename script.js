@@ -9,20 +9,22 @@ let sumbitButton = document.querySelector('.popup__sumbit');
 let formProfile = document.querySelector('.popup__form');
 
 function popupOpen() {
-  popupActive.classList.toggle('popup_click_active');
+  popupActive.classList.toggle('popup_active');
+  inputName.value = nameProfile.textContent;
+  inputStatus.value = statusProfile.textContent;
 };
 
 function popupClose() {
-  popupActive.classList.toggle('popup_click_active');
+  popupActive.classList.toggle('popup_active');
 };
 
 function profileSumbitHandler(evt) {
   evt.preventDefault();
   nameProfile.textContent = `${inputName.value}`;
   statusProfile.textContent = `${inputStatus.value}`;
-}
+  popupClose();
+};
 
 popupOpenButton.addEventListener('click', popupOpen);
 popupCloseButton.addEventListener('click', popupClose);
-sumbitButton.addEventListener('click', popupClose);
 formProfile.addEventListener('submit', profileSumbitHandler);

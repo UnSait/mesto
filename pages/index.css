@@ -32,7 +32,7 @@
 @import url(../blocks/footer/__copyrigth/footer__copyright.css);
 
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/_click/_active/popup_click_active.css);
+@import url(../blocks/popup/_active/popup_active.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__exite/popup__exite.css);
 @import url(../blocks/popup/__exite-icon/popup__exite-icon.css);
