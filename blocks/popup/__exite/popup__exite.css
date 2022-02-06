@@ -1,11 +1,13 @@
 .popup__exite {
   border: none;
   background: none;
+  background-image: url(../../../image/exite.svg);
+  background-size: cover;
   width: 32px;
   height: 32px;
-  position: relative;
-  left: 240px;
-  bottom: 8px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
   transition: 0.5s;
 }
 
@@ -19,7 +21,5 @@
   .popup__exite {
     width: 20px;
     height: 20px;
-    left: 135px;
-    bottom: 16px;
   }
 }

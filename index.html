@@ -13,7 +13,6 @@
         <img class="header__logo" src="./image/Logo.svg" alt="Лого">
       </header>
 
-
       <main class="main">
         <section class="profile">
           <div class="profile__menu">
@@ -31,60 +30,7 @@
 
         <section class="elements">
           <ul class="list elements__element">
-            <li class="elements__element-group">
-              <img class="elements__element-photo" src="./image/1.png" alt="Фото">
-              <div class="elements__element-info">
-                <h2 class="elements__element-name">Карачаевск</h2>
-                <button class="elements__element-button" type="button">
-                  <img class="elements__element-like" src="./image/like.svg" alt="Лайк">
-                </button>
-              </div>
-            </li>
-            <li class="elements__element-group">
-              <img class="elements__element-photo" src="./image/2.png" alt="Фото">
-              <div class="elements__element-info">
-                <h2 class="elements__element-name">Гора Эльбрус</h2>
-                <button class="elements__element-button" type="button">
-                 <img class="elements__element-like" src="./image/like.svg" alt="Лайк">
-                </button>
-              </div>
-            </li>
-            <li class="elements__element-group">
-              <img class="elements__element-photo" src="./image/3.png" alt="Фото">
-              <div class="elements__element-info">
-                <h2 class="elements__element-name">Домбай</h2>
-                <button class="elements__element-button" type="button">
-                  <img class="elements__element-like" src="./image/like.svg" alt="Лайк">
-                </button>
-              </div>
-            </li>
-            <li class="elements__element-group">
-              <img class="elements__element-photo" src="./image/4.png" alt="Фото">
-              <div class="elements__element-info">
-                <h2 class="elements__element-name">Гора Эльбрус</h2>
-                <button class="elements__element-button" type="button">
-                  <img class="elements__element-like" src="./image/like.svg" alt="Лайк">
-                </button>
-              </div>
-            </li>
-            <li class="elements__element-group">
-              <img class="elements__element-photo" src="./image/5.png" alt="Фото">
-              <div class="elements__element-info">
-                <h2 class="elements__element-name">Домбай</h2>
-                <button class="elements__element-button" type="button">
-                  <img class="elements__element-like" src="./image/like.svg" alt="Лайк">
-                </button>
-              </div>
-            </li>
-            <li class="elements__element-group">
-              <img class="elements__element-photo" src="./image/6.png" alt="Фото">
-              <div class="elements__element-info">
-                <h2 class="elements__element-name">Карачаево-Черкесия</h2>
-                <button class="elements__element-button" type="button">
-                  <img class="elements__element-like" src="./image/like.svg" alt="Лайк">
-                </button>
-              </div>
-            </li>
+
           </ul>
         </section>
 
@@ -99,7 +45,6 @@
     <div class="popup">
       <div class="popup__container">
         <button class="popup__exite" type="button">
-          <img class="popup__exite-icon" src="./image/exite.svg" alt="Закрыть">
         </button>
         <form class="popup__form" name="profile-form">
           <h2 class="popup__form-name">Редактировать профиль</h2>
@@ -111,6 +56,44 @@
       </div>
     </div>
 
+    <div class="popup popup-addCard">
+      <div class="popup__container">
+        <button class="popup__exite popup__exite-addCard" type="button">
+        </button>
+        <form class="popup__form popup__form-addCard" name="profile-form">
+          <h2 class="popup__form-name popup__form-name-addCard">Новое место</h2>
+          <input class="popup__input popup__input_type_nameCard" name="input-nameCard" type="text" placeholder="Название">
+          <input class="popup__input popup__input_type_photoCard" name="input-cardPlace" type="text" placeholder="Ссылка на картинку">
+          <button class="popup__sumbit popup__sumbit-addCard" type="submit">Создать
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_full-Screen">
+      <div class="popup__container">
+          <button class="popup__exite popup__exite_full-Screen" type="button">
+          </button>
+          <div class="popup__place-container">
+            <img class="popup__place-photo" src="#" alt="фото">
+            <h2 class="popup__place-name"></h2>
+          </div>
+      </div>
+    </div>
+
+    <template id="template">
+      <li class="elements__element-group">
+        <img class="elements__element-trash" src="./image/Trash.svg" alt="Удалить">
+        <img class="elements__element-photo" src="" alt="Фото">
+        <div class="elements__element-info">
+          <h2 class="elements__element-name"></h2>
+          <button class="elements__element-button" type="button">
+          </button>
+        </div>
+      </li>
+    </template>
+
     <script src="./script.js"></script>
+
 </body>
 </html>

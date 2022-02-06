@@ -1,8 +1,12 @@
 .elements__element-button {
   margin: 0;
   padding: 0;
-  background: none;
-  border: none;
+  width: 22px;
+  height: 19px;
+  background: url(../../../image/like.svg);
+  border: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
   transition: 0.5s;
 }
 
@@ -10,4 +14,8 @@
   opacity: 0.5;
   transition: 0.5s;
   cursor: pointer;
+}
+
+.elements__element-button_active {
+  background: url(../../../image/activeLike.svg);
 }
