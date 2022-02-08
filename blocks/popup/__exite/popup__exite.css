@@ -19,6 +19,8 @@
 
 @media screen and (max-width: 879px) {
   .popup__exite {
+    top: -30px;
+    right: 0;
     width: 20px;
     height: 20px;
   }

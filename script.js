@@ -1,3 +1,4 @@
+//Переменные
 const initialCards = [
   {
     name: 'Архыз',
@@ -24,129 +25,147 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   },
 ];
-
-// Добавление карточек из «Коробки»
-const list = document.querySelector('.elements__element');
+const cardList = document.querySelector('.elements__element');
 const template = document.querySelector('#template').content;
 
-function render() {
-  initialCards.forEach(renderItem);
-}
+const popupProfile = document.querySelector('.popup');
+const popupProfileOpenButton = document.querySelector('.profile__edit-button');
+const popupProfileCloseButton = popupProfile.querySelector('.popup__exite');
+const popupProfileNameProfile = document.querySelector('.profile__name');
+const popupProfileStatusProfile = document.querySelector('.profile__status');
+const popupProfileInputName = popupProfile.querySelector('.popup__input_type_name');
+const popupProfileInputStatus = popupProfile.querySelector('.popup__input_type_stasus');
+const popupProfileSumbitButton = popupProfile.querySelector('.popup__sumbit');
+const popupProfileFormProfile = popupProfile.querySelector('.popup__form');
 
-function renderItem(item) {
-  const newItem = template.cloneNode(true);
-  newItem.querySelector('.elements__element-photo').src = item.link;
-  newItem.querySelector('.elements__element-name').innerText = item.name;
-  addListener(newItem);
-  list.prepend(newItem);
-}
+const popupСard = document.querySelector('.popup-addCard');
+const popupСardOpenButton = document.querySelector('.profile__add-button');
+const popupСardCloseButton = popupСard.querySelector('.popup__exite-addCard');
+const popupСardInputName = popupСard.querySelector('.popup__input_type_nameCard');
+const popupСardInputPhoto = popupСard.querySelector('.popup__input_type_photoCard');
+const popupСardSumbitButton = popupСard.querySelector('.popup__sumbit-addCard');
+const popupСardFormProfile = popupСard.querySelector('.popup__form-addCard');
 
-render();
+const popupFullScreen = document.querySelector('.popup_full-Screen');
+const popupFullScreenName = document.querySelector('.popup__place-name');
+const popupFullScreenPhoto = document.querySelector('.popup__place-photo');
+const popupFullScreenCloseButton = popupFullScreen.querySelector('.popup__exite_full-Screen');
 
-//Попап профиль
-let popupProfileOpenButton = document.querySelector('.profile__edit-button');
-let popupProfileCloseButton = document.querySelector('.popup__exite');
-let popupProfile = document.querySelector('.popup');
-let popupProfileNameProfile = document.querySelector('.profile__name');
-let popupProfileStatusProfile = document.querySelector('.profile__status');
-let popupProfileInputName = document.querySelector('.popup__input_type_name');
-let popupProfileInputStatus = document.querySelector('.popup__input_type_stasus');
-let popupProfileSumbitButton = document.querySelector('.popup__sumbit');
-let popupProfileFormProfile = document.querySelector('.popup__form');
+//Добавление карточек из «Коробки»
 
-function popupProfileOpen() {
-  popupProfile.classList.toggle('popup_active');
-  popupProfileInputName.value = popupProfileNameProfile.textContent;
-  popupProfileInputStatus.value = popupProfileStatusProfile.textContent;
-};
+initialCards.forEach(render);
 
-function popupProfileClose() {
-  popupProfile.classList.toggle('popup_active');
-};
+//Функции
 
-function profileSumbitHandler(evt) {
-  evt.preventDefault();
-  popupProfileNameProfile.textContent = `${popupProfileInputName.value}`;
-  popupProfileStatusProfile.textContent = `${popupProfileInputStatus.value}`;
-  popupClose();
-};
+  //Функция добавления карточек из «Коробки»
+
+  function render(item) {
+    const newCard = createCard(item.name, item.link);
+    addCard(cardList, newCard);
+  }
+
+  // Функция создания новой карточки
+
+  function createCard(cardName, cardLink) {
+    const newCard = template.cloneNode(true);
+    newCard.querySelector('.elements__element-photo').src = cardLink;
+    newCard.querySelector('.elements__element-photo').alt = cardName;
+    newCard.querySelector('.elements__element-name').textContent = cardName;
+    addListener(newCard);
+    return newCard;
+  };
+
+  //Функция добавления новой карточки
+
+  function addCard(container, cardElement) {
+    container.prepend(cardElement);
+  };
+
+  //Функция открытия попапов
+
+  function popupOpen (popupName) {
+    popupName.classList.add('popup_active');
+  };
+
+  //Функция закрытия попапов
+
+  function popupClose (popupName) {
+    popupName.classList.remove('popup_active');
+  };
+
+  //Функция появления "попап профиль"
+
+  function popupProfileOpen() {
+    popupProfileInputName.value = popupProfileNameProfile.textContent;
+    popupProfileInputStatus.value = popupProfileStatusProfile.textContent;
+    popupOpen(popupProfile);
+  };
+
+  //Функция появления "попап добавления карточек"
+
+  function popupСardOpen() {
+    popupСardInputName.value = '';
+    popupСardInputPhoto.value = '';
+    popupOpen(popupСard);
+  };
+
+  //Функция появления "попап маштабирования фотографий карточек"
+
+  function scaleCard(evt) {
+    popupFullScreenPhoto.src = evt.target.src;
+    popupFullScreenName.textContent = evt.target.parentElement.querySelector('.elements__element-name').textContent; //не получилось через closest, возвращает null, подскажите пожалуйста что делаю не так - evt.target.closest('.elements__element-name').textContent
+    popupOpen(popupFullScreen);
+  };
+
+  //Функция обработчика "попап профиль"
+
+  function sumbitHandlerProfile(evt) {
+    evt.preventDefault();
+    popupProfileNameProfile.textContent = popupProfileInputName.value;
+    popupProfileStatusProfile.textContent = popupProfileInputStatus.value;
+    popupClose(popupProfile);
+  };
+
+  //Функция обработчика "попап добавления карточек"
+
+  function sumbitHandlerCard(evt) {
+    evt.preventDefault();
+    const newCard = createCard(popupСardInputName.value, popupСardInputPhoto.value);
+    addCard(cardList, newCard);
+    popupClose(popupСard);
+  };
+
+  //Функция "Лайк"
+
+  function likeCard (evt) {
+    evt.target.classList.toggle('elements__element-button_active');
+  };
+
+  //Функция "Удаление"
+  function removeCard (evt) {
+    evt.target.closest('.elements__element-group').remove();
+  };
+
+  //Функция слушателя таргетных функций
+
+  function addListener (el) {
+    el.querySelector('.elements__element-button').addEventListener('click', likeCard);
+    el.querySelector('.elements__element-trash').addEventListener('click', removeCard);
+    el.querySelector('.elements__element-photo').addEventListener('click', scaleCard);
+  };
+
+//Слушатели
 
 popupProfileOpenButton.addEventListener('click', popupProfileOpen);
-popupProfileCloseButton.addEventListener('click', popupProfileClose);
-popupProfileFormProfile.addEventListener('submit', profileSumbitHandler);
-
-//Попап добавления карточек
-let popupСardOpenButton = document.querySelector('.profile__add-button');
-let popupСardCloseButton = document.querySelector('.popup__exite-addCard');
-let popupСard = document.querySelector('.popup-addCard');
-let popupСardName = document.querySelector('.elements__element-name');
-let popupСardPhoto = document.querySelector('.elements__element-photo');
-let popupСardInputName = document.querySelector('.popup__input_type_nameCard');
-let popupСardInputPhoto = document.querySelector('.popup__input_type_photoCard');
-let popupСardSumbitButton = document.querySelector('.popup__sumbit-addCard');
-let popupСardFormProfile = document.querySelector('.popup__form-addCard');
-
-function popupСardOpen() {
-  popupСardInputName.value = '';
-  popupСardInputPhoto.value = '';
-  popupСard.classList.toggle('popup_active');
-};
-
-function popupСardClose() {
-  popupСard.classList.toggle('popup_active');
-};
-
-function cardSumbitHandler(evt) {
-  evt.preventDefault();
-  const newItem = template.cloneNode(true);
-  newItem.querySelector('.elements__element-name').innerText = `${popupСardInputName.value}`;
-  newItem.querySelector('.elements__element-photo').src = `${popupСardInputPhoto.value}`;
-  addListener(newItem);
-  list.prepend(newItem);
-  popupСardClose();
-
-};
-
 popupСardOpenButton.addEventListener('click', popupСardOpen);
-popupСardCloseButton.addEventListener('click', popupСardClose);
-popupСardFormProfile.addEventListener('submit', cardSumbitHandler);
-
-//Попап маштабирования фотографий карточек
-let popupFullScreen = document.querySelector('.popup_full-Screen');
-let popupFullScreenCloseButton = document.querySelector('.popup__exite_full-Screen');
-
-function popupFullScreenOpen() {
-  popupFullScreen.classList.toggle('popup_active');
-};
-
-function popupFullScreenClose() {
-  popupFullScreen.classList.toggle('popup_active');
-};
-
-popupFullScreenCloseButton.addEventListener('click', popupFullScreenClose);
-
-//Лайк
-function likeCard (evt) {
-  evt.target.classList.toggle('elements__element-button_active');
-};
-
-//Удаление
-function remove (evt) {
-  evt.target.closest('.elements__element-group').remove();
-};
-
-//Маштабирование фотографий карточек
-function scale(evt) {
-  let popupFullScreenPhoto = document.querySelector('.popup__place-photo');
-  let popupFullScreenName = document.querySelector('.popup__place-name');
-  popupFullScreenPhoto.src = evt.target.src;
-  popupFullScreenName.textContent = evt.target.parentNode.querySelector('.elements__element-name').textContent;
-  popupFullScreenOpen();
-};
-
-//Слушатель таргетных функций
-function addListener (el) {
-  el.querySelector('.elements__element-button').addEventListener('click', likeCard);
-  el.querySelector('.elements__element-trash').addEventListener('click', remove);
-  el.querySelector('.elements__element-photo').addEventListener('click', scale);
-};
+popupProfileCloseButton.addEventListener('click', function () {
+  popupClose(popupProfile);
+});
+popupСardCloseButton.addEventListener('click', function () {
+  popupClose(popupСard);
+});
+popupFullScreenCloseButton.addEventListener('click', function () {
+  popupClose(popupFullScreen);
+});
+popupProfileFormProfile.addEventListener('submit', sumbitHandlerProfile);
+popupСardFormProfile.addEventListener('submit', sumbitHandlerCard);
