@@ -25,7 +25,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   },
 ];
-const cardList = document.querySelector('.elements__element');
+const cardsSection = document.querySelector('.elements__element');
 const template = document.querySelector('#template').content;
 
 const popupProfile = document.querySelector('.popup');
@@ -53,15 +53,15 @@ const popupFullScreenCloseButton = popupFullScreen.querySelector('.popup__exite_
 
 //Добавление карточек из «Коробки»
 
-initialCards.forEach(render);
+initialCards.forEach(renderCards);
 
 //Функции
 
   //Функция добавления карточек из «Коробки»
 
-  function render(item) {
+  function renderCards(item) {
     const newCard = createCard(item.name, item.link);
-    addCard(cardList, newCard);
+    addCard(cardsSection, newCard);
   }
 
   // Функция создания новой карточки
@@ -83,56 +83,56 @@ initialCards.forEach(render);
 
   //Функция открытия попапов
 
-  function popupOpen (popupName) {
+  function openPopup (popupName) {
     popupName.classList.add('popup_active');
   };
 
   //Функция закрытия попапов
 
-  function popupClose (popupName) {
+  function closePopup (popupName) {
     popupName.classList.remove('popup_active');
   };
 
   //Функция появления "попап профиль"
 
-  function popupProfileOpen() {
+  function openPopupProfile() {
     popupProfileInputName.value = popupProfileNameProfile.textContent;
     popupProfileInputStatus.value = popupProfileStatusProfile.textContent;
-    popupOpen(popupProfile);
+    openPopup(popupProfile);
   };
 
   //Функция появления "попап добавления карточек"
 
-  function popupСardOpen() {
+  function openPopupСard() {
     popupСardInputName.value = '';
     popupСardInputPhoto.value = '';
-    popupOpen(popupСard);
+    openPopup(popupСard);
   };
 
   //Функция появления "попап маштабирования фотографий карточек"
 
   function scaleCard(evt) {
     popupFullScreenPhoto.src = evt.target.src;
-    popupFullScreenName.textContent = evt.target.parentElement.querySelector('.elements__element-name').textContent; //не получилось через closest, возвращает null, подскажите пожалуйста что делаю не так - evt.target.closest('.elements__element-name').textContent
-    popupOpen(popupFullScreen);
+    popupFullScreenName.textContent = evt.target.closest(".elements__element-group").querySelector('.elements__element-name').textContent;
+    openPopup(popupFullScreen);
   };
 
   //Функция обработчика "попап профиль"
 
-  function sumbitHandlerProfile(evt) {
+  function handleProfileSumbit(evt) {
     evt.preventDefault();
     popupProfileNameProfile.textContent = popupProfileInputName.value;
     popupProfileStatusProfile.textContent = popupProfileInputStatus.value;
-    popupClose(popupProfile);
+    closePopup(popupProfile);
   };
 
   //Функция обработчика "попап добавления карточек"
 
-  function sumbitHandlerCard(evt) {
+  function handleCardSumbit(evt) {
     evt.preventDefault();
     const newCard = createCard(popupСardInputName.value, popupСardInputPhoto.value);
-    addCard(cardList, newCard);
-    popupClose(popupСard);
+    addCard(cardsSection, newCard);
+    closePopup(popupСard);
   };
 
   //Функция "Лайк"
@@ -156,16 +156,16 @@ initialCards.forEach(render);
 
 //Слушатели
 
-popupProfileOpenButton.addEventListener('click', popupProfileOpen);
-popupСardOpenButton.addEventListener('click', popupСardOpen);
+popupProfileOpenButton.addEventListener('click', openPopupProfile);
+popupСardOpenButton.addEventListener('click', openPopupСard);
 popupProfileCloseButton.addEventListener('click', function () {
-  popupClose(popupProfile);
+  closePopup(popupProfile);
 });
 popupСardCloseButton.addEventListener('click', function () {
-  popupClose(popupСard);
+  closePopup(popupСard);
 });
 popupFullScreenCloseButton.addEventListener('click', function () {
-  popupClose(popupFullScreen);
+  closePopup(popupFullScreen);
 });
-popupProfileFormProfile.addEventListener('submit', sumbitHandlerProfile);
-popupСardFormProfile.addEventListener('submit', sumbitHandlerCard);
+popupProfileFormProfile.addEventListener('submit', handleProfileSumbit);
+popupСardFormProfile.addEventListener('submit', handleCardSumbit);
