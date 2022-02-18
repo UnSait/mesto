@@ -48,10 +48,12 @@
       <div class="popup__container">
         <button class="popup__exite" type="button">
         </button>
-        <form class="popup__form" name="profile-form">
+        <form class="popup__form" name="profile-form" novalidate>
           <h2 class="popup__form-name">Редактировать профиль</h2>
-          <input class="popup__input popup__input_type_name" name="input-name" type="text" placeholder="Жак-Ив Кусто">
-          <input class="popup__input popup__input_type_stasus" name="input-status" type="text" placeholder="Исследователь океана">
+          <input id="name-input" class="popup__input popup__input_type_name" name="input-name" type="text" placeholder="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+          <span class="name-input-error popup__input-text-error"></span>
+          <input id="status-input" class="popup__input popup__input_type_stasus" name="input-status" type="text" placeholder="Исследователь океана" minlength="2" maxlength="200" required>
+          <span class="status-input-error popup__input-text-error"></span>
           <button class="popup__sumbit" type="submit">Сохранить
           </button>
         </form>
@@ -62,11 +64,13 @@
       <div class="popup__container">
         <button class="popup__exite popup__exite-addCard" type="button">
         </button>
-        <form class="popup__form popup__form-addCard" name="profile-form">
+        <form class="popup__form popup__form-addCard" name="profile-form" novalidate>
           <h2 class="popup__form-name popup__form-name-addCard">Новое место</h2>
-          <input class="popup__input popup__input_type_nameCard" name="input-nameCard" type="text" placeholder="Название">
-          <input class="popup__input popup__input_type_photoCard" name="input-cardPlace" type="text" placeholder="Ссылка на картинку">
-          <button class="popup__sumbit popup__sumbit-addCard" type="submit">Создать
+          <input id="nameCard-input" class="popup__input popup__input_type_nameCard" name="input-nameCard" type="text" placeholder="Название" minlength="2" maxlength="40" required>
+          <span class="nameCard-input-error popup__input-text-error"></span>
+          <input id="url-input" class="popup__input popup__input_type_photoCard" name="input-cardPlace" type="url" placeholder="Ссылка на картинку" required>
+          <span class="url-input-error popup__input-text-error"></span>
+          <button class="popup__sumbit popup__sumbit_inactive popup__sumbit-addCard" type="submit">Создать
           </button>
         </form>
       </div>
@@ -96,6 +100,7 @@
     </template>
 
     <script src="./script.js"></script>
+    <script src="./validate.js"></script>
 
 </body>
 </html>

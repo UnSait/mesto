@@ -27,6 +27,7 @@ const initialCards = [
 ];
 const cardsSection = document.querySelector('.elements__element');
 const template = document.querySelector('#template').content;
+const generalHandler = document.querySelector('.body');
 
 const popupProfile = document.querySelector('.popup');
 const popupProfileOpenButton = document.querySelector('.profile__edit-button');
@@ -124,6 +125,8 @@ initialCards.forEach(renderCards);
     popupProfileNameProfile.textContent = popupProfileInputName.value;
     popupProfileStatusProfile.textContent = popupProfileInputStatus.value;
     closePopup(popupProfile);
+    popupProfileSumbitButton.setAttribute('disabled', true);
+    popupProfileSumbitButton.classList.add('popup__sumbit_inactive')
   };
 
   //Функция обработчика "попап добавления карточек"
@@ -133,6 +136,8 @@ initialCards.forEach(renderCards);
     const newCard = createCard(popupСardInputName.value, popupСardInputPhoto.value);
     addCard(cardsSection, newCard);
     closePopup(popupСard);
+    popupСardSumbitButton.setAttribute('disabled', true);
+    popupСardSumbitButton.classList.add('popup__sumbit_inactive')
   };
 
   //Функция "Лайк"
@@ -142,6 +147,7 @@ initialCards.forEach(renderCards);
   };
 
   //Функция "Удаление"
+
   function removeCard (evt) {
     evt.target.closest('.elements__element-group').remove();
   };
@@ -158,6 +164,7 @@ initialCards.forEach(renderCards);
 
 popupProfileOpenButton.addEventListener('click', openPopupProfile);
 popupСardOpenButton.addEventListener('click', openPopupСard);
+
 popupProfileCloseButton.addEventListener('click', function () {
   closePopup(popupProfile);
 });
@@ -167,5 +174,24 @@ popupСardCloseButton.addEventListener('click', function () {
 popupFullScreenCloseButton.addEventListener('click', function () {
   closePopup(popupFullScreen);
 });
-popupProfileFormProfile.addEventListener('submit', handleProfileSumbit);
+generalHandler.addEventListener('click', function (evt) {
+  if (evt.target.classList.contains('popup_active')) {
+    closePopup(evt.target);
+  }
+});
+generalHandler.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    if (popupProfile.classList.contains('popup_active')) {
+      closePopup(popupProfile);
+    }
+    else if (popupСard.classList.contains('popup_active')) {
+      closePopup(popupСard);
+    }
+    else if (popupFullScreen.classList.contains('popup_active')) {
+      closePopup(popupFullScreen);
+    }
+  };
+});
+
+popupProfileFormProfile.addEventListener('submit',  handleProfileSumbit);
 popupСardFormProfile.addEventListener('submit', handleCardSumbit);
