@@ -84,14 +84,31 @@ initialCards.forEach(renderCards);
 
   //Функция открытия попапов
 
-  function openPopup (popupName) {
+  function openPopup(popupName) {
     popupName.classList.add('popup_active');
+    generalHandler.addEventListener('keydown', closeByESC);
+    generalHandler.addEventListener('click', closeByClick);
   };
 
-  //Функция закрытия попапов
+  //Функции закрытия попапов
 
-  function closePopup (popupName) {
+  function closePopup(popupName) {
     popupName.classList.remove('popup_active');
+    generalHandler.removeEventListener('keydown', closeByESC);
+    generalHandler.removeEventListener('click', closeByClick);
+  };
+
+  function closeByESC(evt) {
+    if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_active');
+      closePopup(openedPopup);
+    };
+  };
+
+  function closeByClick(evt) {
+    if (evt.target.classList.contains('popup_active')) {
+      closePopup(evt.target);
+    };
   };
 
   //Функция появления "попап профиль"
@@ -114,6 +131,7 @@ initialCards.forEach(renderCards);
 
   function scaleCard(evt) {
     popupFullScreenPhoto.src = evt.target.src;
+    popupFullScreenPhoto.alt = evt.target.alt;
     popupFullScreenName.textContent = evt.target.closest(".elements__element-group").querySelector('.elements__element-name').textContent;
     openPopup(popupFullScreen);
   };
@@ -173,24 +191,6 @@ popupСardCloseButton.addEventListener('click', function () {
 });
 popupFullScreenCloseButton.addEventListener('click', function () {
   closePopup(popupFullScreen);
-});
-generalHandler.addEventListener('click', function (evt) {
-  if (evt.target.classList.contains('popup_active')) {
-    closePopup(evt.target);
-  }
-});
-generalHandler.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Escape') {
-    if (popupProfile.classList.contains('popup_active')) {
-      closePopup(popupProfile);
-    }
-    else if (popupСard.classList.contains('popup_active')) {
-      closePopup(popupСard);
-    }
-    else if (popupFullScreen.classList.contains('popup_active')) {
-      closePopup(popupFullScreen);
-    }
-  };
 });
 
 popupProfileFormProfile.addEventListener('submit',  handleProfileSumbit);
