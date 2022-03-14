@@ -1,3 +1,8 @@
+// Экспортируемые модули
+
+import {FormValidator} from './FormValidator.js';
+import {Card} from './Card.js';
+
 //Переменные
 const initialCards = [
   {
@@ -26,7 +31,6 @@ const initialCards = [
   },
 ];
 const cardsSection = document.querySelector('.elements__element');
-const template = document.querySelector('#template').content;
 const generalHandler = document.querySelector('.body');
 
 const popupProfile = document.querySelector('.popup');
@@ -47,44 +51,47 @@ const popupСardInputPhoto = popupСard.querySelector('.popup__input_type_photoC
 const popupСardSumbitButton = popupСard.querySelector('.popup__sumbit-addCard');
 const popupСardFormProfile = popupСard.querySelector('.popup__form-addCard');
 
-const popupFullScreen = document.querySelector('.popup_full-Screen');
-const popupFullScreenName = document.querySelector('.popup__place-name');
-const popupFullScreenPhoto = document.querySelector('.popup__place-photo');
-const popupFullScreenCloseButton = popupFullScreen.querySelector('.popup__exite_full-Screen');
+export const popupFullScreen = document.querySelector('.popup_full-Screen');
+export const popupFullScreenName = document.querySelector('.popup__place-name');
+export const popupFullScreenPhoto = document.querySelector('.popup__place-photo');
+export const popupFullScreenCloseButton = popupFullScreen.querySelector('.popup__exite_full-Screen');
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__sumbit',
+  inactiveButtonClass: 'popup__sumbit_inactive',
+  inputErrorClass: 'popup__input-error',
+  errorClass: 'popup__input-text-error'
+};
+
+const profileForm = new FormValidator(validationConfig, popupProfileFormProfile);
+const cardForm = new FormValidator(validationConfig, popupСardFormProfile);
+
+profileForm.enableValidation();
+cardForm.enableValidation();
 
 //Добавление карточек из «Коробки»
 
-initialCards.forEach(renderCards);
+initialCards.forEach(addCard);
 
 //Функции
 
-  //Функция добавления карточек из «Коробки»
+  //Функция создания карточек
 
-  function renderCards(item) {
-    const newCard = createCard(item.name, item.link);
-    addCard(cardsSection, newCard);
+  function generateCard(item) {
+    return new Card(item, '#template').createCard();
   }
 
-  // Функция создания новой карточки
+  //Функция добавления карточек
 
-  function createCard(cardName, cardLink) {
-    const newCard = template.cloneNode(true);
-    newCard.querySelector('.elements__element-photo').src = cardLink;
-    newCard.querySelector('.elements__element-photo').alt = cardName;
-    newCard.querySelector('.elements__element-name').textContent = cardName;
-    addListener(newCard);
-    return newCard;
-  };
-
-  //Функция добавления новой карточки
-
-  function addCard(container, cardElement) {
-    container.prepend(cardElement);
+  function addCard(item) {
+    cardsSection.prepend(generateCard(item));
   };
 
   //Функция открытия попапов
 
-  function openPopup(popupName) {
+  export function openPopup(popupName) {
     popupName.classList.add('popup_active');
     generalHandler.addEventListener('keydown', closeByESC);
     generalHandler.addEventListener('click', closeByClick);
@@ -117,6 +124,7 @@ initialCards.forEach(renderCards);
     popupProfileInputName.value = popupProfileNameProfile.textContent;
     popupProfileInputStatus.value = popupProfileStatusProfile.textContent;
     openPopup(popupProfile);
+    profileForm.resetErrors();
   };
 
   //Функция появления "попап добавления карточек"
@@ -125,15 +133,7 @@ initialCards.forEach(renderCards);
     popupСardInputName.value = '';
     popupСardInputPhoto.value = '';
     openPopup(popupСard);
-  };
-
-  //Функция появления "попап маштабирования фотографий карточек"
-
-  function scaleCard(evt) {
-    popupFullScreenPhoto.src = evt.target.src;
-    popupFullScreenPhoto.alt = evt.target.alt;
-    popupFullScreenName.textContent = evt.target.closest(".elements__element-group").querySelector('.elements__element-name').textContent;
-    openPopup(popupFullScreen);
+    cardForm.resetErrors();
   };
 
   //Функция обработчика "попап профиль"
@@ -144,38 +144,18 @@ initialCards.forEach(renderCards);
     popupProfileStatusProfile.textContent = popupProfileInputStatus.value;
     closePopup(popupProfile);
     popupProfileSumbitButton.setAttribute('disabled', true);
-    popupProfileSumbitButton.classList.add('popup__sumbit_inactive')
+    popupProfileSumbitButton.classList.add('popup__sumbit_inactive');
   };
 
   //Функция обработчика "попап добавления карточек"
 
   function handleCardSumbit(evt) {
     evt.preventDefault();
-    const newCard = createCard(popupСardInputName.value, popupСardInputPhoto.value);
-    addCard(cardsSection, newCard);
+    const newCard = {name: popupСardInputName.value, link: popupСardInputPhoto.value};
+    addCard(newCard);
     closePopup(popupСard);
     popupСardSumbitButton.setAttribute('disabled', true);
-    popupСardSumbitButton.classList.add('popup__sumbit_inactive')
-  };
-
-  //Функция "Лайк"
-
-  function likeCard (evt) {
-    evt.target.classList.toggle('elements__element-button_active');
-  };
-
-  //Функция "Удаление"
-
-  function removeCard (evt) {
-    evt.target.closest('.elements__element-group').remove();
-  };
-
-  //Функция слушателя таргетных функций
-
-  function addListener (el) {
-    el.querySelector('.elements__element-button').addEventListener('click', likeCard);
-    el.querySelector('.elements__element-trash').addEventListener('click', removeCard);
-    el.querySelector('.elements__element-photo').addEventListener('click', scaleCard);
+    popupСardSumbitButton.classList.add('popup__sumbit_inactive');
   };
 
 //Слушатели
