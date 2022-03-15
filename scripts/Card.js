@@ -24,15 +24,16 @@ export class Card {
   _scaleCard(evt) {
     popupFullScreenPhoto.src = evt.target.src;
     popupFullScreenPhoto.alt = evt.target.alt;
-    popupFullScreenName.textContent = evt.target.closest(".elements__element-group").querySelector('.elements__element-name').textContent;
+    popupFullScreenName.textContent = evt.target.alt;
     openPopup(popupFullScreen);
   };
 
   createCard() {
     this._newCard = this._cardTemplate.cloneNode(true);
-    this._newCard.querySelector('.elements__element-photo').alt = this._name;
+    this._cardImage = this._newCard.querySelector('.elements__element-photo');
+    this._cardImage.alt = this._name;
+    this._cardImage.src = this._link;
     this._newCard.querySelector('.elements__element-name').textContent = this._name;
-    this._newCard.querySelector('.elements__element-photo').src = this._link;
     this._addListener(this._newCard);
     return this._newCard;
   };

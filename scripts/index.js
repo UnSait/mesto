@@ -31,9 +31,9 @@ const initialCards = [
   },
 ];
 const cardsSection = document.querySelector('.elements__element');
-const generalHandler = document.querySelector('.body');
+const body = document.querySelector('.body');
 
-const popupProfile = document.querySelector('.popup');
+const popupProfile = document.querySelector('.popup-profile');
 const popupProfileOpenButton = document.querySelector('.profile__edit-button');
 const popupProfileCloseButton = popupProfile.querySelector('.popup__exite');
 const popupProfileNameProfile = document.querySelector('.profile__name');
@@ -93,16 +93,16 @@ initialCards.forEach(addCard);
 
   export function openPopup(popupName) {
     popupName.classList.add('popup_active');
-    generalHandler.addEventListener('keydown', closeByESC);
-    generalHandler.addEventListener('click', closeByClick);
+    body.addEventListener('keydown', closeByESC);
+    body.addEventListener('mousedown', closeByClick);
   };
 
   //Функции закрытия попапов
 
   function closePopup(popupName) {
     popupName.classList.remove('popup_active');
-    generalHandler.removeEventListener('keydown', closeByESC);
-    generalHandler.removeEventListener('click', closeByClick);
+    body.removeEventListener('keydown', closeByESC);
+    body.removeEventListener('mousedown', closeByClick);
   };
 
   function closeByESC(evt) {
@@ -130,8 +130,7 @@ initialCards.forEach(addCard);
   //Функция появления "попап добавления карточек"
 
   function openPopupСard() {
-    popupСardInputName.value = '';
-    popupСardInputPhoto.value = '';
+    popupСardFormProfile.reset();
     openPopup(popupСard);
     cardForm.resetErrors();
   };
@@ -143,8 +142,7 @@ initialCards.forEach(addCard);
     popupProfileNameProfile.textContent = popupProfileInputName.value;
     popupProfileStatusProfile.textContent = popupProfileInputStatus.value;
     closePopup(popupProfile);
-    popupProfileSumbitButton.setAttribute('disabled', true);
-    popupProfileSumbitButton.classList.add('popup__sumbit_inactive');
+    profileForm.inactiveButton(popupProfileSumbitButton);
   };
 
   //Функция обработчика "попап добавления карточек"
@@ -154,8 +152,7 @@ initialCards.forEach(addCard);
     const newCard = {name: popupСardInputName.value, link: popupСardInputPhoto.value};
     addCard(newCard);
     closePopup(popupСard);
-    popupСardSumbitButton.setAttribute('disabled', true);
-    popupСardSumbitButton.classList.add('popup__sumbit_inactive');
+    cardForm.inactiveButton(popupСardSumbitButton);
   };
 
 //Слушатели

@@ -60,6 +60,11 @@ export class FormValidator {
     });
   };
 
+  inactiveButton(btn) {
+    btn.setAttribute('disabled', true);
+    btn.classList.add('popup__sumbit_inactive');
+  }
+
   enableValidation() {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
