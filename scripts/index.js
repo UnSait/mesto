@@ -124,7 +124,7 @@ initialCards.forEach(addCard);
     popupProfileInputName.value = popupProfileNameProfile.textContent;
     popupProfileInputStatus.value = popupProfileStatusProfile.textContent;
     openPopup(popupProfile);
-    profileForm.resetErrors();
+    profileForm.resetValidation();
   };
 
   //Функция появления "попап добавления карточек"
@@ -132,7 +132,7 @@ initialCards.forEach(addCard);
   function openPopupСard() {
     popupСardFormProfile.reset();
     openPopup(popupСard);
-    cardForm.resetErrors();
+    cardForm.resetValidation();
   };
 
   //Функция обработчика "попап профиль"
@@ -142,7 +142,6 @@ initialCards.forEach(addCard);
     popupProfileNameProfile.textContent = popupProfileInputName.value;
     popupProfileStatusProfile.textContent = popupProfileInputStatus.value;
     closePopup(popupProfile);
-    profileForm.inactiveButton(popupProfileSumbitButton);
   };
 
   //Функция обработчика "попап добавления карточек"
@@ -152,7 +151,6 @@ initialCards.forEach(addCard);
     const newCard = {name: popupСardInputName.value, link: popupСardInputPhoto.value};
     addCard(newCard);
     closePopup(popupСard);
-    cardForm.inactiveButton(popupСardSumbitButton);
   };
 
 //Слушатели

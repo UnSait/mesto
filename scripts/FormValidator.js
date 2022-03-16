@@ -54,16 +54,12 @@ export class FormValidator {
     });
   };
 
-  resetErrors() {
+  resetValidation() {
+    this._toggleButtonState();
     this._inputList.forEach((inputElement) => {
       this._hideError(inputElement);
     });
   };
-
-  inactiveButton(btn) {
-    btn.setAttribute('disabled', true);
-    btn.classList.add('popup__sumbit_inactive');
-  }
 
   enableValidation() {
     this._form.addEventListener('submit', (evt) => {
