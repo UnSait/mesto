@@ -10,7 +10,7 @@ export class Card {
   _addListener(el) {
     el.querySelector('.elements__element-button').addEventListener('click', this._likeCard);
     el.querySelector('.elements__element-trash').addEventListener('click', this._removeCard);
-    el.querySelector('.elements__element-photo').addEventListener('click', this._scaleCard);
+    this._cardImage.addEventListener('click', this._scaleCard);
   };
 
   _removeCard(evt) {
