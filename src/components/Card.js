@@ -1,16 +1,15 @@
-import {popupFullScreenPhoto, popupFullScreenName, popupFullScreen, openPopup} from './index.js';
-
 export class Card {
-  constructor(data, cardSelectorTemplate) {
+  constructor(data, cardSelectorTemplate, handleCardClick) {
     this._cardTemplate = document.querySelector(cardSelectorTemplate).content;
     this._name = data.name;
     this._link = data.link;
+    this._handleCardClick = handleCardClick
   };
 
   _addListener(el) {
     el.querySelector('.elements__element-button').addEventListener('click', this._likeCard);
     el.querySelector('.elements__element-trash').addEventListener('click', this._removeCard);
-    this._cardImage.addEventListener('click', this._scaleCard);
+    this._cardImage.addEventListener('click', this._handleCardClick);
   };
 
   _removeCard(evt) {
@@ -19,13 +18,6 @@ export class Card {
 
   _likeCard(evt) {
     evt.target.classList.toggle('elements__element-button_active');
-  };
-
-  _scaleCard(evt) {
-    popupFullScreenPhoto.src = evt.target.src;
-    popupFullScreenPhoto.alt = evt.target.alt;
-    popupFullScreenName.textContent = evt.target.alt;
-    openPopup(popupFullScreen);
   };
 
   createCard() {
