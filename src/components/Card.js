@@ -8,20 +8,20 @@ export class Card {
 
   _addListener(el) {
     el.querySelector('.elements__element-button').addEventListener('click', this._likeCard);
-    el.querySelector('.elements__element-trash').addEventListener('click', this._removeCard);
+    el.querySelector('.elements__element-trash').addEventListener('click', () => this._removeCard(el));
     this._cardImage.addEventListener('click', this._handleCardClick);
   };
 
-  _removeCard(evt) {
-    evt.target.closest('.elements__element-group').remove();
-  };
+  _removeCard(el) {
+    el.remove();
+  }
 
   _likeCard(evt) {
     evt.target.classList.toggle('elements__element-button_active');
   };
 
   createCard() {
-    this._newCard = this._cardTemplate.cloneNode(true);
+    this._newCard = this._cardTemplate.querySelector('.elements__element-group').cloneNode(true);
     this._cardImage = this._newCard.querySelector('.elements__element-photo');
     this._cardImage.alt = this._name;
     this._cardImage.src = this._link;
