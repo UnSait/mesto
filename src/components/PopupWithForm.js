@@ -6,6 +6,7 @@ export class PopupWithForm extends Popup {
     this._handleSumbit = handleSumbit;
     this._submitForm = this._submitForm.bind(this);
     this._form = this._popup.querySelector('.popup__form');
+    this._submitButton = this._form.querySelector('.popup__sumbit')
   };
 
   _getInputValues() {
@@ -18,7 +19,12 @@ export class PopupWithForm extends Popup {
     return values;
   };
 
-  _submitForm() {
+  changeHandler(newHandler) {
+    this._handleSumbit = newHandler;
+  };
+
+  _submitForm(evt) {
+    evt.preventDefault();
     this._handleSumbit(this._getInputValues());
   };
 
@@ -31,6 +37,15 @@ export class PopupWithForm extends Popup {
     super.close();
     this._form.reset();
     this._form.removeEventListener('submit', this._submitForm);
+  };
+
+  open(text) {
+    super.open();
+    this._submitButton.textContent = text;
+  };
+
+  omgUX(text) {
+    this._submitButton.textContent = text;
   };
 
 };
