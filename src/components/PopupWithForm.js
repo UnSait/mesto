@@ -7,12 +7,12 @@ export class PopupWithForm extends Popup {
     this._submitForm = this._submitForm.bind(this);
     this._form = this._popup.querySelector('.popup__form');
     this._submitButton = this._form.querySelector('.popup__sumbit')
+    this._inputsForm = [...this._form.querySelectorAll('.popup__input')]
   };
 
   _getInputValues() {
-    const inputsForm = [...this._form.querySelectorAll('.popup__input')]
     const values = {};
-    inputsForm.forEach(input => {
+    this._inputsForm.forEach(input => {
       values[input.name] = input.value
     });
 
@@ -39,12 +39,7 @@ export class PopupWithForm extends Popup {
     this._form.removeEventListener('submit', this._submitForm);
   };
 
-  open(text) {
-    super.open();
-    this._submitButton.textContent = text;
-  };
-
-  omgUX(text) {
+  renderLoading(text) {
     this._submitButton.textContent = text;
   };
 
