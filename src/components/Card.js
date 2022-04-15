@@ -1,5 +1,5 @@
 export class Card {
-  constructor(data, cardSelectorTemplate, handleCardClick, handleCardDelete, userInfo, likeCard, dislikeCard) {
+  constructor(data, cardSelectorTemplate, handleCardClick, handleCardDelete, userId, likeCard, dislikeCard) {
     this._cardTemplate = document.querySelector(cardSelectorTemplate).content;
     this._name = data.name;
     this._link = data.link;
@@ -8,7 +8,7 @@ export class Card {
     this._cardId = data._id;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
-    this._userInfo = userInfo;
+    this._userId = userId;
     this._addLike = likeCard;
     this._dislike = dislikeCard;
   };
@@ -24,24 +24,20 @@ export class Card {
   };
 
   _removeDeleteButton() {
-    this._userInfo
-    .then(res => {
-        if (res._id !== this._ownerId) {
-            this._deleteButton.remove()
-        };
-   });
+    if (this._userId !== this._ownerId) {
+      this._deleteButton.remove()
+    };
   };
 
   _renderLikesInfo(newLikes) {
     this._likes = newLikes;
     this._likeCountElement.textContent = this._likes.length;
-    this._userInfo
-    .then(res => {
-      this._likes.forEach(item => {
-        if (item._id === res._id) {
-          this._likeButton.classList.add('elements__element-button_active');
-        };
-      });
+
+
+    this._likes.forEach(item => {
+      if (item._id === this._userId) {
+        this._likeButton.classList.add('elements__element-button_active');
+      };
     });
   };
 

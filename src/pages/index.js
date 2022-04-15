@@ -9,6 +9,8 @@ import {Card} from '../components/Card.js';
 import {popupProfileOpenButton, popupProfileInputName, popupProfileInputStatus, popupProfileFormProfile, popupСardOpenButton, popupСardFormProfile, popupAvatarFormProfile, popupAvatarOpenButton, validationConfig} from '../utils/constants.js';
 import "./index.css";
 
+let userId;
+
 const profileForm = new FormValidator(validationConfig, popupProfileFormProfile);
 const cardForm = new FormValidator(validationConfig, popupСardFormProfile);
 const avatarForm = new FormValidator(validationConfig, popupAvatarFormProfile);
@@ -28,11 +30,6 @@ const api = new Api({
   }
 });
 
-const dataUser = api.getProfile(); //Я сделал это, потому что не могу получить id профиля по другому.
-                                   //Пришлось поэтому переписывать код под эту переменную. Помогите пожалуйста, уже глаза на лоб лезут одно и тоже по несколько раз переписывать :(
-//let userId; (undefined)
-
-
 //Загрузка данных с сервера
 
 Promise.all([api.getProfile(), api.getInitialCards()])
@@ -40,9 +37,10 @@ Promise.all([api.getProfile(), api.getInitialCards()])
     userInfo.setUserInfo(res[0]);
     userInfo.setUserAvatar(res[0]);
     section.rendererItems(res[1]);
-    //userId = res[0]._id;
+    userId = res[0]._id
   })
   .catch(err => console.log("Не удалось загрузить:", err));
+
 
 //Функции
 
@@ -70,7 +68,7 @@ Promise.all([api.getProfile(), api.getInitialCards()])
         });
       },
 
-      dataUser, addLikeCard, deletelikeCard);
+      userId, addLikeCard, deletelikeCard);
       return card.createCard();
   };
 
@@ -125,7 +123,7 @@ Promise.all([api.getProfile(), api.getInitialCards()])
     });
   };
 
-  // Функии лайка карточек
+  // Функции лайка карточек
 
   function addLikeCard(cardId) {
     return api.addLikeCard(cardId);
